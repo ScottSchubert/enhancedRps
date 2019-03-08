@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  	<div class="wrapper">
+	    <div class="choices">
+	    	<div data-weapon="rock">
+	    	</div>
+	    	<div data-weapon="scissor">
+	    	</div>
+	    	<div data-weapon="paper">
+	    	</div>
+	    </div>
+	    <div class="results">
+	    	<div data-play="player">
+	    	</div>
+	    	<div data-play="comp">
+	    	</div>
+	    </div>
+  	</div>
+
+
+
+	  <script type="text/javascript">
+	  	function game(){
+	  		round = 1;
+	  		playerWins = 0;
+	  		compWins = 0;
+	  		console.log("Time to throw down! Best 3 out of 5");
+	  		while (round < 6){
+	  			console.log("Round " + round)
+	  			roundResult = playRound(playerInput(),computerPlay());
+	  			if (roundResult === 2){
+	  				compWins += 1;
+	  				round += 1;
+	  			}	else if (roundResult === 1){
+	  				playerWins += 1;
+	  				round += 1;
+	  			}
+
+	  			if (playerWins === 3){
+	  				return "Nice work bro! You won!";
+	  			} else if (compWins === 3){
+	  				return "Sad news bro - the comp won!";
+	  			}
+	  		}
+	  	}
+
+	  	function computerPlay(){
+	  		x = Math.random();
+	  		if (x <= 0.3333) {
+	  			return "rock";
+	  		} else if (x >= 0.6667) {
+	  			return "scissor";
+	  		} else {
+	  			return "paper"
+	  		};
+	  	}
+
+	  	function playerInput(){
+	  		while (true) {
+					x = prompt("Let's go! What's your choice").toLowerCase();
+		  		if (x === 'rock' || x === 'scissor' || x === 'paper'){
+		  			return x;
+		  		}
+	  		}
+	  	}
+
+	  	function playRound(playerChoice,compChoice){
+
+	  		if (playerChoice === compChoice) {
+	  			console.log ("It's a tie! Go again!");
+	  			return 0;
+	  		}
+
+	  		if ((playerChoice === 'rock' && compChoice === 'scissor') || (playerChoice === 'paper' && 
+	  			compChoice === 'rock') || (playerChoice === 'scissor' && compChoice === 'paper')){
+	  			console.log (`You win! ${playerChoice} beats ${compChoice}`);
+	  			return 1;
+	  		} else {
+	  			console.log (`You lose! ${playerChoice} is beaten by ${compChoice}`);
+	  			return 2;
+	  		}
+	  	}
+	  </script>
+  </body>
+</html>
